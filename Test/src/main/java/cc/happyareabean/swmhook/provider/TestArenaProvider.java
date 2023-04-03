@@ -2,7 +2,6 @@ package cc.happyareabean.swmhook.provider;
 
 import cc.happyareabean.swmhook.hook.ArenaProvider;
 import cc.happyareabean.swmhook.objects.SWMHWorld;
-import org.bukkit.World;
 
 public class TestArenaProvider extends ArenaProvider {
 
