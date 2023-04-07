@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group = 'cc.happyareabean.swmhook.provider'
+version = '1.0.0'
+
+repositories {
+    flatDir{
+        dirs "libs"
+    }
+}
+
+dependencies {
+    compileOnly "the.lab:TheLabLegacy"
+    compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
+    compileOnly "cc.happyareabean:SWMHook:1.4.4-SNAPSHOT"
+
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
