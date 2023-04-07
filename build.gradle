@@ -14,14 +14,39 @@ repositories {
 }
 
 dependencies {
-    compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
-    compileOnly "rip.diamond:Eden:1.1.6-93ede29"
-    compileOnly "cc.happyareabean:SWMHook:1.4.4-SNAPSHOT"
-
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+subprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+
+        maven { url = "https://repo.codemc.io/repository/nms/" }
+        maven { url = "https://repo.fantasyrealms.net/other-libraries" }
+    }
+}
+
 test {
     useJUnitPlatform()
+}
+
+tasks.register('copyJar', Copy) {
+    dependsOn tasks.build
+    from rootProject.subprojects.collect { project ->
+        project.file("${project.buildDir}/libs")
+    }
+    into "${rootProject.projectDir}/target"
+    eachFile { fileDetails ->
+        // exclude non-JAR files
+        if (!fileDetails.name.endsWith('.jar')) {
+            fileDetails.exclude()
+        }
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.register('cleanTarget', Delete) {
+    delete "${rootProject.projectDir}/target"
 }

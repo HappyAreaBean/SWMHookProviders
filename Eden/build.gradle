@@ -5,14 +5,6 @@ plugins {
 group = 'cc.happyareabean.swmhook.provider'
 version = '1.0.0'
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-
-    maven { url = "https://repo.codemc.io/repository/nms/" }
-    maven { url = "https://repo.fantasyrealms.net/other-libraries" }
-}
-
 dependencies {
     compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
     compileOnly "rip.diamond:Eden:1.1.6-93ede29"
