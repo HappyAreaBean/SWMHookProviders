@@ -58,8 +58,6 @@ public class TheLabArenaProvider extends ArenaProvider {
 					List<Location> endlobbys = new ArrayList<>((List<Location>) endlobbysField.get(game));
 					List<Experiment> experiments = new ArrayList<>(game.getExperiments());
 
-					info(experiments.toString());
-
 					lobby.setWorld(bukkitWorld);
 					zukLoc.setWorld(bukkitWorld);
 					zukPaths.forEach(l -> l.setWorld(bukkitWorld));
