@@ -1,6 +1,7 @@
 package cc.happyareabean.swmhook.provider;
 
 import cc.happyareabean.swmhook.SWMHook;
+import cc.happyareabean.swmhook.constants.Constants;
 import cc.happyareabean.swmhook.hook.ArenaProvider;
 import cc.happyareabean.swmhook.objects.SWMHWorld;
 import lombok.SneakyThrows;
@@ -132,6 +133,17 @@ public class TheLabArenaProvider extends ArenaProvider {
 	}
 
 	@Override
+	public void onInitialization() {
+		if (!getTheLab().getDescription().getDepend().contains(Constants.SWM)) {
+			log("====================================================================");
+			log(String.format("TheLab's plugin.yml does not include %s as a dependency.", Constants.SWM));
+			log("This may cause problems when loading arena in TheLab plugin.");
+			log("If you have problem loading arena, please manually add '" + Constants.SWM + "' as a dependency in TheLab plugin.yml.");
+			log("====================================================================");
+		}
+	}
+
+	@Override
 	public String getProviderName() {
 		return "TheLab";
 	}
@@ -144,6 +156,11 @@ public class TheLabArenaProvider extends ArenaProvider {
 	@Override
 	public String getProviderVersion() {
 		return "1.0.0";
+	}
+
+	@Override
+	public String getProviderAuthor() {
+		return "HappyAreaBean";
 	}
 
 	private Main getTheLab() {
