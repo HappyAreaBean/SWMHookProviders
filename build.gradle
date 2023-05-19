@@ -26,6 +26,10 @@ subprojects {
         maven { url = "https://repo.codemc.io/repository/nms/" }
         maven { url = "https://repo.fantasyrealms.net/other-libraries" }
     }
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 test {
