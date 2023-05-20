@@ -23,6 +23,7 @@ subprojects {
         mavenCentral()
         mavenLocal()
 
+        maven { url = "https://jitpack.io" }
         maven { url = "https://repo.codemc.io/repository/nms/" }
         maven { url = "https://repo.fantasyrealms.net/other-libraries" }
     }
