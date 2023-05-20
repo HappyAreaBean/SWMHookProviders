@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group = 'cc.happyareabean.swmhook.provider'
+version = '1.0.0'
+
+dependencies {
+    compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
+    compileOnly 'com.github.Despical:OITC:2.3.3'
+    compileOnly "cc.happyareabean:SWMHook:1.4.6"
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,5 +1,6 @@
 rootProject.name = 'SWMHookProviders'
 include 'Eden'
+include 'OITC'
 include 'TheLab'
 include 'Test'
 
