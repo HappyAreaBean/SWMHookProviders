@@ -77,6 +77,7 @@ SWMHook currently supports below arena provider:
 
 - [Eden](https://github.com/diamond-rip/Eden)
 - [The Lab](https://www.spigotmc.org/resources/26665/)
+- [OITC](https://www.spigotmc.org/resources/81185/)
 
 More providers will be available soon.
 
