@@ -16,12 +16,13 @@ import ro.Fr33styler.TheLab.Main;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TheLabArenaProvider extends ArenaProvider {
 
 	@Override
 	public void addArena(SWMHWorld world) {
-		List<Game> games = getTheLab().getManager().getGames().stream().filter(a -> a.getLobby() != null).toList();
+		List<Game> games = getTheLab().getManager().getGames().stream().filter(a -> a.getLobby() != null).collect(Collectors.toList());
 
 		if (games.stream().noneMatch(g -> g.getLobby().getWorld().getName().equalsIgnoreCase(world.getTemplateName()))) {
 			SWMHook.getInstance().getArenaProviderManager().addFailedWorld(world);
