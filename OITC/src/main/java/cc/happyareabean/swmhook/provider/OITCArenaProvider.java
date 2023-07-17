@@ -23,7 +23,8 @@ public class OITCArenaProvider extends ArenaProvider {
 	@Override
 	public void addArena(SWMHWorld world) {
 
-		List<Arena> arenas = ArenaRegistry.getArenas().stream().filter(Arena::isReady).collect(Collectors.toList());
+		ArenaRegistry registry = getOITC().getArenaRegistry();
+		List<Arena> arenas = registry.getArenas().stream().filter(Arena::isReady).collect(Collectors.toList());
 
 		if (arenas.stream().noneMatch(a -> a.getId().equalsIgnoreCase(world.getTemplateName()))) {
 			SWMHook.getInstance().getArenaProviderManager().addFailedWorld(world);
@@ -72,7 +73,8 @@ public class OITCArenaProvider extends ArenaProvider {
 				newArena.setLobbyLocation(lobby);
 				newArena.setEndLocation(end);
 				newArena.setPlayerSpawnPoints(playerSpawn);
-				ArenaRegistry.registerArena(newArena);
+
+				registry.registerArena(newArena);
 				newArena.start();
 
 				success(String.format("Added arena [%s].", toBeGenerated));
@@ -82,7 +84,8 @@ public class OITCArenaProvider extends ArenaProvider {
 
 	@Override
 	public void removeArena(SWMHWorld world) {
-		if (ArenaRegistry.getArenas().stream().noneMatch(a -> a.getLobbyLocation().getWorld().getName().equals(world.getTemplateName()))) return;
+		ArenaRegistry registry = getOITC().getArenaRegistry();
+		if (registry.getArenas().stream().noneMatch(a -> a.getLobbyLocation().getWorld().getName().equals(world.getTemplateName()))) return;
 
 		for (int i = 0; i < world.getAmount(); i++) {
 			int currentNumber = i + 1;
@@ -90,7 +93,7 @@ public class OITCArenaProvider extends ArenaProvider {
 
 			info(String.format("Removing arena [%s] in provider %s...", formatted, getProviderName()));
 
-			boolean remove = ArenaRegistry.getArenas().removeIf(a -> a.getLobbyLocation().getWorld().getName().equalsIgnoreCase(formatted));
+			boolean remove = registry.getArenas().removeIf(a -> a.getLobbyLocation().getWorld().getName().equalsIgnoreCase(formatted));
 
 			if (remove)
 				success(String.format("Removed arena [%s] from provider %s!", formatted, getProviderName()));
@@ -102,7 +105,7 @@ public class OITCArenaProvider extends ArenaProvider {
 	@Override
 	public boolean isArena(World world) {
 		SWMHWorld swmhWorld = SWMHook.getInstance().getWorldsList().getFromWorld(world);
-		List<Arena> arenas = ArenaRegistry.getArenas().stream().filter(Arena::isReady).collect(Collectors.toList());
+		List<Arena> arenas = getOITC().getArenaRegistry().getArenas().stream().filter(Arena::isReady).collect(Collectors.toList());
 
 		if (swmhWorld == null) return false;
 		if (arenas.stream().noneMatch(a -> a.getLobbyLocation().getWorld().getName().equalsIgnoreCase(world.getName()))) return false;
@@ -124,12 +127,17 @@ public class OITCArenaProvider extends ArenaProvider {
 
 	@Override
 	public String getProviderVersion() {
-		return "1.0.0";
+		return "1.0.1";
 	}
 
 	@Override
 	public String getProviderAuthor() {
 		return "HappyAreaBean";
+	}
+
+	@Override
+	public String getRequiredPluginVersion() {
+		return "2.4.5";
 	}
 
 	private Main getOITC() {
