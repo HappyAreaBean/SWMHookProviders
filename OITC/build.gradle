@@ -5,9 +5,14 @@ plugins {
 group = 'cc.happyareabean.swmhook.provider'
 version = '1.0.0'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 dependencies {
     compileOnly "org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT"
-    compileOnly 'me.despical:one-in-the-chamber:2.4.3'
+    compileOnly 'me.despical:one-in-the-chamber:2.4.5'
     compileOnly "cc.happyareabean:SWMHook:1.4.6"
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
